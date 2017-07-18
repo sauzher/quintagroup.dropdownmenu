@@ -47,6 +47,7 @@ setup(name='quintagroup.dropdownmenu',
       install_requires=[
           'setuptools',
           'plone.registry',
+          'plone.api',
           'plone.app.registry',
       ],
       tests_require=tests_require,
