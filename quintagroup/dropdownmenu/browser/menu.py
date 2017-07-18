@@ -21,10 +21,11 @@ class DropDownMenuQueryBuilder(SitemapQueryBuilder):
         self.context = context
 
         # basing query path on navigation root
-        portal = api.portal.get()
-        navRoot = api.portal.getNavigationRootObject(context, portal)
-        navRootPath = '/'.join(navRoot.getPhysicalPath())
-        self.query['path']['query'] = navRootPath
+        if self._settings.navRootResets:
+            portal = api.portal.get()
+            navRoot = api.portal.getNavigationRootObject(context, portal)
+            navRootPath = '/'.join(navRoot.getPhysicalPath())
+            self.query['path']['query'] = navRootPath
 
         # customize depth according to dropdown menu settings
         if self._settings.content_tabs_level > 0:
