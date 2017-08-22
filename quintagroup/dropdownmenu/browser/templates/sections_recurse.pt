@@ -6,9 +6,11 @@
         ><tal:navitem repeat="node children"
             ><li tal:define="is_current      node/currentItem;
                              is_in_path      node/currentParent;
+                             is_anon         context/@@plone_portal_state/anonymous;
                              li_id           string:portaltab-${node/id}-level$level;
                              item_url        node/getURL;
                              item_remote_url node/getRemoteUrl|nothing;
+                             item_remote_url python: (item_remote_url and is_anon) and item_remote_url.replace('manageweb.ict.','www.') or item_remote_url;
                              link_remote     node/link_remote|nothing;
                              item_url        python:link_remote and item_remote_url or item_url;
                              li_curr_class   python:is_current and 'selected' or '';
