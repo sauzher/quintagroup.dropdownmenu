@@ -41,7 +41,9 @@ class DropDownMenuSettingsEditForm(controlpanel.RegistryEditForm):
         if value:
             widget.value = ['selected']
 
-        widget.items = []
+        # raises "cant set attribute in plone4.3"
+        # really dunno what it's meant for this piece of code
+        #widget.items = [] 
         for count, term in enumerate(widget.terms):
             checked = widget.isChecked(term)
             id = '%s-%i' % (widget.id, count)
