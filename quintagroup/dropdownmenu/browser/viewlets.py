@@ -286,10 +286,10 @@ class GlobalSectionsViewlet(common.GlobalSectionsViewlet):
             return version[0] == 4
 
     def realUrl(self, url):
-        portal_url = self.site_url()
+        portal_url = self.site_url
         
         path = url.split('/')
-        if "uniba" in path[2]:
+        if  path[2] in ['www.uniba.it', 'uniba.it', 'manageweb.ict.uniba.it']:
             path = '/'.join(path[3:])
             url = "{}/{}".format(portal_url, path)
             
