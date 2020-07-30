@@ -101,3 +101,9 @@ class IDropDownMenuSettings(Interface):
         title=_(u"Display menu as select for small screens"),
         description=_(u"Use select tag to display menu for small screens"),
         default=False)
+
+    navRootResets = schema.Bool(
+        title=_(u"Resets menu to the near Navigation Root"),
+        description=_(u"Use select tag if the menu should be built according to \
+        the near ancestor who implements INavigationRoot (sub-sites)"),
+        default=False)

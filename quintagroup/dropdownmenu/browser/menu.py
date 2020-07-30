@@ -4,6 +4,8 @@ from zope.interface import implements
 from Products.CMFPlone.browser.navtree import SitemapQueryBuilder
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
 
+from plone import api
+
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 
@@ -17,6 +19,13 @@ class DropDownMenuQueryBuilder(SitemapQueryBuilder):
     def __init__(self, context):
         super(DropDownMenuQueryBuilder, self).__init__(context)
         self.context = context
+
+        # basing query path on navigation root
+        if self._settings.navRootResets:
+            portal = api.portal.get()
+            navRoot = api.portal.getNavigationRootObject(context, portal)
+            navRootPath = '/'.join(navRoot.getPhysicalPath())
+            self.query['path']['query'] = navRootPath
 
         # customize depth according to dropdown menu settings
         if self._settings.content_tabs_level > 0:
